@@ -1,0 +1,36 @@
+definition_version: 1
+native_app:
+  name: data_quality_manager
+  source_stage: app_src.stage
+  artifacts:
+    - src: "*"
+      dest: ./
+
+streamlit:
+  name: data_quality_manager
+  stage: DATA_QUALITY.CONFIG.CODE
+  query_warehouse: COMPUTE_WH
+  main_file: streamlit_app.py
+  pages_dir: src/
+  title: "Data Quality Manager"
+  
+# Environment configuration
+env:
+  account: &account
+  user: &user  
+  password: &password
+  role: &role
+  warehouse: &warehouse COMPUTE_WH
+  database: &database DATA_QUALITY
+  schema: &schema CONFIG
+
+# Connection profiles
+connections:
+  default:
+    account: *account
+    user: *user
+    password: *password
+    role: *role
+    warehouse: *warehouse
+    database: *database
+    schema: *schema
